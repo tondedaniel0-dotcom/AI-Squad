@@ -1,12 +1,16 @@
-def analyser(probleme):
-    return f"""
-[QA]
+from models import ReponseAgent
 
-Analyse du problème '{probleme}' :
 
-- Vérifier les cas d'erreur
-- Prévoir des tests
-- Éviter les régressions
-
-Conclusion : écrire des tests dès le début.
-"""
+def analyser(probleme: str) -> ReponseAgent:
+    return ReponseAgent(
+        role="QA",
+        proposition=(
+            f"Pour le problème '{probleme}', définir les cas d'erreur et écrire "
+            "les tests dès le début afin d'éviter les régressions."
+        ),
+        risques=[
+            "Les scénarios de test peuvent manquer des comportements inattendus.",
+            "Des tests insuffisants peuvent laisser passer des régressions.",
+        ],
+        confiance=0.9,
+    )

@@ -7,10 +7,20 @@ probleme = input("Quel est le problème à analyser ? ")
 
 print("\n" + "=" * 50)
 
-print(architecte(probleme))
-print(developpeur(probleme))
-print(qa(probleme))
-print(critique(probleme))
+reponses = [
+    architecte(probleme),
+    developpeur(probleme),
+    qa(probleme),
+    critique(probleme),
+]
+
+for reponse in reponses:
+    print(f"\n[{reponse.role}]")
+    print(f"Proposition : {reponse.proposition}")
+    print("Risques :")
+    for risque in reponse.risques:
+        print(f"- {risque}")
+    print(f"Confiance : {reponse.confiance:.0%}")
 
 print("\n" + "=" * 50)
 print("DEBAT TERMINE")
