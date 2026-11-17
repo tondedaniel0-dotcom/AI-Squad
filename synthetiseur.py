@@ -1,6 +1,6 @@
 import re
 
-from models import ReponseAgent, Synthese
+from models import RevisionAgent, Synthese
 
 
 _POINTS_ACCORD = {
@@ -31,6 +31,12 @@ _RISQUES_COMMUNS = {
         "inattendus",
         "régressions",
     },
+    "Les contraintes de validation doivent être résolues": {
+        "validation",
+        "testable",
+        "critères",
+        "tests",
+    },
 }
 
 
@@ -50,23 +56,37 @@ def _themes_communs(
     return resultats
 
 
-def synthetiser(reponses: list[ReponseAgent]) -> Synthese:
-    if not reponses:
-        raise ValueError("Impossible de produire une synthèse sans réponse d'agent.")
+def synthetiser(revisions: list[RevisionAgent]) -> Synthese:
+    if not revisions:
+        raise ValueError("Impossible de produire une synthèse sans révision d'agent.")
 
-    propositions = [_mots(reponse.proposition) for reponse in reponses]
-    risques = [_mots(" ".join(reponse.risques)) for reponse in reponses]
+    propositions = [_mots(revision.proposition) for revision in revisions]
+    risques = [
+        _mots(" ".join(revision.risques + revision.objections))
+        for revision in revisions
+    ]
     points_accord = _themes_communs(propositions, _POINTS_ACCORD)
     risques_communs = _themes_communs(risques, _RISQUES_COMMUNS)
+    objections = [
+        f"{revision.role} : {objection}"
+        for revision in revisions
+        for objection in revision.objections
+    ]
 
     recommandation = (
         "Construire un MVP en Python avec une architecture simple et évolutive, "
         "puis valider les hypothèses et les cas limites avec des tests dès le début."
     )
+    if objections:
+        recommandation += (
+            " Les objections soulevées doivent être traitées avant de figer "
+            "l'architecture."
+        )
 
     return Synthese(
         points_accord=points_accord,
         risques_communs=risques_communs,
-        confiance_moyenne=sum(r.confiance for r in reponses) / len(reponses),
+        objections=objections,
+        confiance_moyenne=sum(r.confiance for r in revisions) / len(revisions),
         recommandation=recommandation,
     )
