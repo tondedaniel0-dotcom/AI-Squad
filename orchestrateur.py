@@ -8,19 +8,30 @@ from critique import analyser as critique
 from critique import reviser as reviser_critique
 from designer import analyser as designer
 from designer import reviser as reviser_designer
+from memory_store import MemoryStore
 from synthetiseur import synthetiser
 from vote import organiser_vote
 
 probleme = input("Quel est le problème à analyser ? ")
+memory_store = MemoryStore()
+lecons_communes = memory_store.lire_commune()
 
 print("\n" + "=" * 50)
 
 reponses = [
-    architecte(probleme),
-    developpeur(probleme),
-    qa(probleme),
-    critique(probleme),
-    designer(probleme),
+    architecte(
+        probleme,
+        memory_store.lire_agent("Architecte"),
+        lecons_communes,
+    ),
+    developpeur(
+        probleme,
+        memory_store.lire_agent("Développeur"),
+        lecons_communes,
+    ),
+    qa(probleme, memory_store.lire_agent("QA"), lecons_communes),
+    critique(probleme, memory_store.lire_agent("Critique"), lecons_communes),
+    designer(probleme, memory_store.lire_agent("Designer"), lecons_communes),
 ]
 
 for reponse in reponses:

@@ -13,6 +13,25 @@ AGENT_MEMORY_FILES = {
 COMMON_MEMORY_FILE = "lessons_learned.json"
 
 
+def formater_contexte(
+    lecons_individuelles: list[dict[str, Any]] | None,
+    lecons_communes: list[dict[str, Any]] | None,
+) -> str:
+    sections = []
+    for libelle, lecons in (
+        ("mémoire individuelle", lecons_individuelles or []),
+        ("mémoire commune", lecons_communes or []),
+    ):
+        contenus = [
+            str(lecon["contenu"])
+            for lecon in lecons
+            if isinstance(lecon.get("contenu"), str) and lecon["contenu"].strip()
+        ]
+        if contenus:
+            sections.append(f"{libelle} : " + " | ".join(contenus))
+    return " ; ".join(sections)
+
+
 class MemoryStore:
     def __init__(self, memory_dir: str | Path = "memory") -> None:
         self.memory_dir = Path(memory_dir)

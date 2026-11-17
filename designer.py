@@ -1,18 +1,27 @@
+from memory_store import formater_contexte
 from models import ReponseAgent, RevisionAgent
 
 
-def analyser(probleme: str) -> ReponseAgent:
+def analyser(
+    probleme: str,
+    lecons_individuelles: list[dict[str, object]] | None = None,
+    lecons_communes: list[dict[str, object]] | None = None,
+) -> ReponseAgent:
+    contexte_memoire = formater_contexte(lecons_individuelles, lecons_communes)
+    proposition = (
+        f"Pour '{probleme}', concevoir un parcours en trois étapes : "
+        "accueil, action principale et confirmation, avec un seul bouton "
+        "d'action principal par écran. Utiliser une approche mobile-first, "
+        "des mises en page fluides sans défilement horizontal et des zones "
+        "tactiles d'au moins 44 px. Rendre chaque champ accessible au clavier, "
+        "avec un libellé explicite, un focus visible, un contraste d'au moins "
+        "4,5:1 et des erreurs affichées directement près du champ concerné."
+    )
+    if contexte_memoire:
+        proposition += f" Leçons prises en compte : {contexte_memoire}."
     return ReponseAgent(
         role="Designer",
-        proposition=(
-            f"Pour '{probleme}', concevoir un parcours en trois étapes : "
-            "accueil, action principale et confirmation, avec un seul bouton "
-            "d'action principal par écran. Utiliser une approche mobile-first, "
-            "des mises en page fluides sans défilement horizontal et des zones "
-            "tactiles d'au moins 44 px. Rendre chaque champ accessible au clavier, "
-            "avec un libellé explicite, un focus visible, un contraste d'au moins "
-            "4,5:1 et des erreurs affichées directement près du champ concerné."
-        ),
+        proposition=proposition,
         risques=[
             "Un parcours trop long peut augmenter l'abandon avant la confirmation.",
             "Une interface non testée sur mobile peut provoquer des débordements "

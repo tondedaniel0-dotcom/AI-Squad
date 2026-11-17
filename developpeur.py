@@ -1,13 +1,22 @@
+from memory_store import formater_contexte
 from models import ReponseAgent, RevisionAgent
 
 
-def analyser(probleme: str) -> ReponseAgent:
+def analyser(
+    probleme: str,
+    lecons_individuelles: list[dict[str, object]] | None = None,
+    lecons_communes: list[dict[str, object]] | None = None,
+) -> ReponseAgent:
+    contexte_memoire = formater_contexte(lecons_individuelles, lecons_communes)
+    proposition = (
+        f"Pour le problème '{probleme}', produire rapidement un MVP fonctionnel "
+        "en Python, puis ajouter les fonctionnalités progressivement."
+    )
+    if contexte_memoire:
+        proposition += f" Leçons prises en compte : {contexte_memoire}."
     return ReponseAgent(
         role="Développeur",
-        proposition=(
-            f"Pour le problème '{probleme}', produire rapidement un MVP fonctionnel "
-            "en Python, puis ajouter les fonctionnalités progressivement."
-        ),
+        proposition=proposition,
         risques=[
             "Le MVP pourrait nécessiter une refactorisation avant la mise en production.",
             "Une implémentation rapide peut laisser des cas limites non traités.",

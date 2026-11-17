@@ -1,13 +1,22 @@
+from memory_store import formater_contexte
 from models import ReponseAgent, RevisionAgent
 
 
-def analyser(probleme: str) -> ReponseAgent:
+def analyser(
+    probleme: str,
+    lecons_individuelles: list[dict[str, object]] | None = None,
+    lecons_communes: list[dict[str, object]] | None = None,
+) -> ReponseAgent:
+    contexte_memoire = formater_contexte(lecons_individuelles, lecons_communes)
+    proposition = (
+        f"Pour le problème '{probleme}', définir les cas d'erreur et écrire "
+        "les tests dès le début afin d'éviter les régressions."
+    )
+    if contexte_memoire:
+        proposition += f" Leçons prises en compte : {contexte_memoire}."
     return ReponseAgent(
         role="QA",
-        proposition=(
-            f"Pour le problème '{probleme}', définir les cas d'erreur et écrire "
-            "les tests dès le début afin d'éviter les régressions."
-        ),
+        proposition=proposition,
         risques=[
             "Les scénarios de test peuvent manquer des comportements inattendus.",
             "Des tests insuffisants peuvent laisser passer des régressions.",

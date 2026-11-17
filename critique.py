@@ -1,13 +1,22 @@
+from memory_store import formater_contexte
 from models import ReponseAgent, RevisionAgent
 
 
-def analyser(probleme: str) -> ReponseAgent:
+def analyser(
+    probleme: str,
+    lecons_individuelles: list[dict[str, object]] | None = None,
+    lecons_communes: list[dict[str, object]] | None = None,
+) -> ReponseAgent:
+    contexte_memoire = formater_contexte(lecons_individuelles, lecons_communes)
+    proposition = (
+        f"Concernant '{probleme}', vérifier les hypothèses, simplifier la "
+        "solution et éviter le surdéveloppement."
+    )
+    if contexte_memoire:
+        proposition += f" Leçons prises en compte : {contexte_memoire}."
     return ReponseAgent(
         role="Critique",
-        proposition=(
-            f"Concernant '{probleme}', vérifier les hypothèses, simplifier la "
-            "solution et éviter le surdéveloppement."
-        ),
+        proposition=proposition,
         risques=[
             "Une simplification excessive peut omettre des besoins importants.",
             "Les hypothèses non vérifiées peuvent conduire à une mauvaise décision.",
