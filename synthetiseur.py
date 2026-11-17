@@ -18,6 +18,16 @@ _POINTS_ACCORD = {
         "tests",
         "régressions",
     },
+    "Un parcours utilisateur simple et accessible": {
+        "parcours",
+        "simple",
+        "accessible",
+    },
+    "Une interface adaptée au mobile": {
+        "mobile-first",
+        "mobile",
+        "responsive",
+    },
 }
 
 _RISQUES_COMMUNS = {
@@ -36,6 +46,12 @@ _RISQUES_COMMUNS = {
         "testable",
         "critères",
         "tests",
+    },
+    "L'accessibilité et l'affichage responsive doivent être vérifiés": {
+        "accessibilité",
+        "clavier",
+        "mobile",
+        "débordement",
     },
 }
 

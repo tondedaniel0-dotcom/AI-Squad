@@ -6,6 +6,8 @@ from qa import analyser as qa
 from qa import reviser as reviser_qa
 from critique import analyser as critique
 from critique import reviser as reviser_critique
+from designer import analyser as designer
+from designer import reviser as reviser_designer
 from synthetiseur import synthetiser
 from vote import organiser_vote
 
@@ -18,6 +20,7 @@ reponses = [
     developpeur(probleme),
     qa(probleme),
     critique(probleme),
+    designer(probleme),
 ]
 
 for reponse in reponses:
@@ -33,6 +36,7 @@ revisions = [
     reviser_developpeur(reponses[1], reponses[:1] + reponses[2:]),
     reviser_qa(reponses[2], reponses[:2] + reponses[3:]),
     reviser_critique(reponses[3], reponses[:3]),
+    reviser_designer(reponses[4], reponses[:4]),
 ]
 
 print("\n" + "=" * 50)
