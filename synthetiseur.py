@@ -36,6 +36,15 @@ _POINTS_ACCORD = {
         "locataire",
         "permissions",
     },
+    "La valeur produit doit être priorisée": {
+        "valeur",
+        "utilisateur",
+        "mvp",
+        "priorit",
+        "roi",
+        "objectif",
+        "périmètre",
+    },
 }
 
 _RISQUES_COMMUNS = {

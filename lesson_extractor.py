@@ -44,6 +44,8 @@ def extraire_lecons(
                     "accessible au clavier et conforme aux besoins mobile.",
         "Security": "Séparer les rôles, isoler chaque tenant SaaS, contrôler "
                      "les permissions côté serveur et protéger les données.",
+        "Product Owner": "Prioriser les besoins utilisateur, mesurer la valeur "
+                         "métier et limiter le périmètre du MVP.",
     }
 
     lecons = {}
@@ -91,6 +93,7 @@ def sauvegarder_lecons(
         "Critique",
         "Designer",
         "Security",
+        "Product Owner",
     ):
         store.ajouter_lecon(role, lecons[role])
     store.ajouter_lecon_commune(lecons["commun"])

@@ -8,7 +8,15 @@ from models import RevisionAgent, Synthese
 
 
 def creer_revisions() -> list[RevisionAgent]:
-    roles = ("Architecte", "Développeur", "QA", "Critique", "Designer")
+    roles = (
+        "Architecte",
+        "Développeur",
+        "QA",
+        "Critique",
+        "Designer",
+        "Security",
+        "Product Owner",
+    )
     return [
         RevisionAgent(
             role=role,
@@ -34,7 +42,7 @@ def creer_synthese() -> Synthese:
 
 
 class LessonExtractorTests(unittest.TestCase):
-    def test_extraire_six_lecons(self) -> None:
+    def test_extraire_sept_lecons(self) -> None:
         lecons = extraire_lecons(
             "concevoir une application",
             creer_revisions(),
@@ -50,6 +58,7 @@ class LessonExtractorTests(unittest.TestCase):
                 "Critique",
                 "Designer",
                 "Security",
+                "Product Owner",
                 "commun",
             },
         )
@@ -72,6 +81,8 @@ class LessonExtractorTests(unittest.TestCase):
             self.assertEqual(len(store.lire_agent("QA")), 1)
             self.assertEqual(len(store.lire_agent("Critique")), 1)
             self.assertEqual(len(store.lire_agent("Designer")), 1)
+            self.assertEqual(len(store.lire_agent("Security")), 1)
+            self.assertEqual(len(store.lire_agent("Product Owner")), 1)
             self.assertEqual(len(store.lire_commune()), 1)
 
     def test_evitement_des_doublons(self) -> None:

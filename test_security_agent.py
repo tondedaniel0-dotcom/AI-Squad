@@ -7,6 +7,7 @@ from lesson_extractor import sauvegarder_lecons
 from memory_store import MemoryStore
 from models import ReponseAgent, RevisionAgent, Synthese
 from security import analyser, reviser
+from product_owner import analyser as analyser_product_owner
 from synthetiseur import synthetiser
 from vote import organiser_vote
 
@@ -29,7 +30,7 @@ class SecurityAgentTests(unittest.TestCase):
         self.assertEqual(revision.role, "Security")
         self.assertGreaterEqual(len(revision.objections), 1)
 
-    def test_integration_complete_avec_six_agents(self) -> None:
+    def test_integration_complete_avec_sept_agents(self) -> None:
         revisions = [
             RevisionAgent(
                 role,
@@ -84,14 +85,21 @@ class SecurityAgentTests(unittest.TestCase):
                     ["Vérifier les permissions côté serveur."],
                     0.95,
                 ),
+                (
+                    "Product Owner",
+                    "MVP prioritaire, valeur utilisateur, ROI et périmètre.",
+                    ["Fonctionnalités inutiles"],
+                    ["Définir un objectif métier."],
+                    0.90,
+                ),
             )
         ]
 
         resultat = organiser_vote(revisions)
-        self.assertEqual(len(resultat.votes), 6)
+        self.assertEqual(len(resultat.votes), 7)
         for vote in resultat.votes:
             self.assertTrue(vote.justification)
-        self.assertEqual(sum(resultat.scores.values()), 6)
+        self.assertEqual(sum(resultat.scores.values()), 7)
         self.assertEqual(set(resultat.scores), {
             "Architecte",
             "Développeur",
@@ -99,6 +107,7 @@ class SecurityAgentTests(unittest.TestCase):
             "Critique",
             "Designer",
             "Security",
+            "Product Owner",
         })
 
     def test_lecon_security_en_memoire(self) -> None:
@@ -131,6 +140,17 @@ class SecurityAgentTests(unittest.TestCase):
                     ["Vérifier les permissions côté serveur."],
                     0.95,
                     "Objection sécurité",
+                )
+            )
+            revisions.append(
+                RevisionAgent(
+                    "Product Owner",
+                    "modifier",
+                    "Prioriser la réservation, le paiement et l'annulation.",
+                    ["Périmètre excessif"],
+                    ["Définir la valeur utilisateur."],
+                    0.90,
+                    "Révision produit",
                 )
             )
             synthese = Synthese(
@@ -172,6 +192,10 @@ class SecurityAgentTests(unittest.TestCase):
                     "Security",
                     "Authentification, autorisation, tenant, permissions "
                     "et chiffrement.",
+                ),
+                (
+                    "Product Owner",
+                    "Valeur utilisateur, MVP, priorités, ROI et périmètre.",
                 ),
             )
         ]

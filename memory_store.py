@@ -10,6 +10,7 @@ AGENT_MEMORY_FILES = {
     "Critique": "critique.json",
     "Designer": "designer.json",
     "Security": "security.json",
+    "Product Owner": "product_owner.json",
 }
 COMMON_MEMORY_FILE = "lessons_learned.json"
 

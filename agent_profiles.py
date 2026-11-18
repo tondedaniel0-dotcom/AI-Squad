@@ -44,6 +44,13 @@ PROFILS_AGENT = {
         niveau_prudence=5,
         specialite="sécurité applicative",
     ),
+    "Product Owner": ProfilAgent(
+        role="Product Owner",
+        style="clair, stratégique et orienté arbitrage",
+        niveau_creativite=4,
+        niveau_prudence=4,
+        specialite="stratégie produit",
+    ),
 }
 
 

@@ -7,6 +7,7 @@ from developpeur import analyser as analyser_developpeur
 from designer import analyser as analyser_designer
 from qa import analyser as analyser_qa
 from security import analyser as analyser_security
+from product_owner import analyser as analyser_product_owner
 
 
 ANALYSEURS = {
@@ -16,6 +17,7 @@ ANALYSEURS = {
     "Critique": analyser_critique,
     "Designer": analyser_designer,
     "Security": analyser_security,
+    "Product Owner": analyser_product_owner,
 }
 
 
@@ -63,6 +65,7 @@ class AgentProfileTests(unittest.TestCase):
         self.assertIn("remets en cause", propositions["Critique"].lower())
         self.assertIn("utilisateur", propositions["Designer"].lower())
         self.assertIn("tenant", propositions["Security"].lower())
+        self.assertIn("valeur", propositions["Product Owner"].lower())
 
 
 if __name__ == "__main__":

@@ -9,6 +9,7 @@ from designer import analyser as analyser_designer
 from memory_store import MemoryStore
 from qa import analyser as analyser_qa
 from security import analyser as analyser_security
+from product_owner import analyser as analyser_product_owner
 
 
 ANALYSEURS = {
@@ -18,6 +19,7 @@ ANALYSEURS = {
     "Critique": analyser_critique,
     "Designer": analyser_designer,
     "Security": analyser_security,
+    "Product Owner": analyser_product_owner,
 }
 
 

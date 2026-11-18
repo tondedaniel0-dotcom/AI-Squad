@@ -53,6 +53,16 @@ class IndividualVoteTests(unittest.TestCase):
                 "mobile et l'interface.",
                 0.88,
             ),
+            revision(
+                "Security",
+                "Séparer les rôles, contrôler les permissions, sécuriser les sessions.",
+                0.95,
+            ),
+            revision(
+                "Product Owner",
+                "Prioriser le MVP selon la valeur utilisateur, le ROI et le périmètre.",
+                0.90,
+            ),
         ]
 
         resultat = organiser_vote(revisions)
@@ -61,7 +71,7 @@ class IndividualVoteTests(unittest.TestCase):
         self.assertGreater(len(set(candidats)), 1)
         self.assertNotEqual(candidats, ["QA"] * 5)
         self.assertTrue(all(vote.justification for vote in resultat.votes))
-        self.assertEqual(sum(resultat.scores.values()), 5)
+        self.assertEqual(sum(resultat.scores.values()), 7)
         self.assertGreater(resultat.taux_consensus, 0)
 
     def test_toutes_les_propositions_sont_evaluees(self) -> None:
@@ -103,6 +113,13 @@ class IndividualVoteTests(unittest.TestCase):
                 0.95,
             ),
         ])
+        revisions.extend([
+            revision(
+                "Product Owner",
+                "Valeur métier, besoins utilisateur, MVP, priorités, périmètre et ROI.",
+                0.90,
+            ),
+        ])
         for votant in (
             "Architecte",
             "Développeur",
@@ -110,12 +127,13 @@ class IndividualVoteTests(unittest.TestCase):
             "Critique",
             "Designer",
             "Security",
+            "Product Owner",
         ):
             scores = [
                 noter_proposition(votant, proposition)[0]
                 for proposition in revisions
             ]
-            self.assertEqual(len(scores), 6)
+            self.assertEqual(len(scores), 7)
             self.assertTrue(all(0 <= score <= 10 for score in scores))
 
     def test_consensus_intermediaire_possible(self) -> None:
@@ -147,11 +165,21 @@ class IndividualVoteTests(unittest.TestCase):
                 "Parcours utilisateur, accessibilité responsive, clarté et feedback.",
                 0.88,
             ),
+            revision(
+                "Security",
+                "Isolation du tenant, contrôle des permissions, chiffrement et authentification.",
+                0.95,
+            ),
+            revision(
+                "Product Owner",
+                "MVP prioritaire, valeur utilisateur, ROI, périmètre et objectifs.",
+                0.90,
+            ),
         ]
 
         resultat = organiser_vote(revisions)
 
-        self.assertGreater(resultat.taux_consensus, 0.2)
+        self.assertGreater(resultat.taux_consensus, 1 / 7)
         self.assertLess(resultat.taux_consensus, 1.0)
 
 

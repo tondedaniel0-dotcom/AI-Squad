@@ -30,5 +30,13 @@
     "source": "synthese_finale",
     "probleme": "SaaS de réservation",
     "confiance": 0.85
+  },
+  {
+    "id": "3f3c4ad4e78d",
+    "agent": "Equipe",
+    "contenu": "Lancer un MVP de réservation sécurisé, testable et mesurable. Points d'accord : MVP prioritaire; Sécurité du tenant. Risques communs : Périmètre excessif; Cas d’erreur.",
+    "source": "synthese_finale",
+    "probleme": "SaaS de réservation de terrains",
+    "confiance": 0.87
   }
 ]

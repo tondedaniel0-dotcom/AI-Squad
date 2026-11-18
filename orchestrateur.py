@@ -11,6 +11,8 @@ from designer import analyser as designer
 from designer import reviser as reviser_designer
 from security import analyser as security
 from security import reviser as reviser_security
+from product_owner import analyser as product_owner
+from product_owner import reviser as reviser_product_owner
 from lesson_extractor import sauvegarder_lecons
 from memory_store import MemoryStore
 from synthetiseur import synthetiser
@@ -59,6 +61,12 @@ reponses = [
         lecons_communes,
         obtenir_profil("Security"),
     ),
+    product_owner(
+        probleme,
+        memory_store.lire_agent("Product Owner"),
+        lecons_communes,
+        obtenir_profil("Product Owner"),
+    ),
 ]
 
 for reponse in reponses:
@@ -99,6 +107,11 @@ revisions = [
         reponses[5],
         reponses[:5],
         obtenir_profil("Security"),
+    ),
+    reviser_product_owner(
+        reponses[6],
+        reponses[:6],
+        obtenir_profil("Product Owner"),
     ),
 ]
 
