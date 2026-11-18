@@ -1,1 +1,10 @@
-[]
+[
+  {
+    "id": "c1011f349a73",
+    "agent": "Architecte",
+    "contenu": "Conserver une architecture simple, séparée en responsabilités réutilisables et évolutive.",
+    "source": "synthese_finale",
+    "probleme": "démonstration de persistance",
+    "confiance": 0.8
+  }
+]

@@ -8,6 +8,7 @@ from critique import analyser as critique
 from critique import reviser as reviser_critique
 from designer import analyser as designer
 from designer import reviser as reviser_designer
+from lesson_extractor import sauvegarder_lecons
 from memory_store import MemoryStore
 from synthetiseur import synthetiser
 from vote import organiser_vote
@@ -90,3 +91,9 @@ for objection in synthese.objections:
     print(f"- {objection}")
 print(f"\nConfiance moyenne : {synthese.confiance_moyenne:.0%}")
 print(f"\nRecommandation : {synthese.recommandation}")
+
+lecons_generees = sauvegarder_lecons(probleme, revisions, synthese, memory_store)
+print("\nApprentissage enregistré :")
+for role in ("Architecte", "Développeur", "QA", "Critique", "Designer"):
+    print(f"- {role}")
+print("- mémoire commune")

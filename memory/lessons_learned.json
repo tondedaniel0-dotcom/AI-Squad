@@ -1,1 +1,10 @@
-[]
+[
+  {
+    "id": "af650c5dcbcb",
+    "agent": "Equipe",
+    "contenu": "Construire un MVP testable, accessible et évolutif. Points d'accord : Approche progressive. Risques communs : Cas limites insuffisamment testés.",
+    "source": "synthese_finale",
+    "probleme": "démonstration de persistance",
+    "confiance": 0.8
+  }
+]

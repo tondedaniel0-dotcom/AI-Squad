@@ -1,1 +1,10 @@
-[]
+[
+  {
+    "id": "3559aa66451d",
+    "agent": "Critique",
+    "contenu": "Expliciter les hypothèses, challenger la complexité et conserver les objections jusqu'à leur résolution.",
+    "source": "synthese_finale",
+    "probleme": "démonstration de persistance",
+    "confiance": 0.8
+  }
+]

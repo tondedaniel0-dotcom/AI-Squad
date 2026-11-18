@@ -1,1 +1,10 @@
-[]
+[
+  {
+    "id": "263cdc01c3a5",
+    "agent": "Développeur",
+    "contenu": "Démarrer par un MVP fonctionnel, limiter l'étendue initiale et préparer les cas limites pour l'évolution.",
+    "source": "synthese_finale",
+    "probleme": "démonstration de persistance",
+    "confiance": 0.8
+  }
+]

@@ -1,1 +1,10 @@
-[]
+[
+  {
+    "id": "3fb8a430d7cb",
+    "agent": "QA",
+    "contenu": "Définir les critères d'acceptation, les cas d'erreur et les tests de régression avant de figer l'implémentation.",
+    "source": "synthese_finale",
+    "probleme": "démonstration de persistance",
+    "confiance": 0.8
+  }
+]

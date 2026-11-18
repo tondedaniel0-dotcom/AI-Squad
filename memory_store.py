@@ -56,11 +56,29 @@ class MemoryStore:
 
     def ajouter_lecon(self, role: str, lecon: dict[str, Any]) -> None:
         lecons = self.lire_agent(role)
+        if any(
+            element.get("id") == lecon.get("id")
+            or (
+                element.get("contenu") == lecon.get("contenu")
+                and element.get("source") == lecon.get("source")
+            )
+            for element in lecons
+        ):
+            return
         lecons.append(self._valider_lecon(lecon))
         self._ecrire_json(self.memory_dir / AGENT_MEMORY_FILES[role], lecons)
 
     def ajouter_lecon_commune(self, lecon: dict[str, Any]) -> None:
         lecons = self.lire_commune()
+        if any(
+            element.get("id") == lecon.get("id")
+            or (
+                element.get("contenu") == lecon.get("contenu")
+                and element.get("source") == lecon.get("source")
+            )
+            for element in lecons
+        ):
+            return
         lecons.append(self._valider_lecon(lecon))
         self._ecrire_json(self.memory_dir / COMMON_MEMORY_FILE, lecons)
 

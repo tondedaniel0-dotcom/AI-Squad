@@ -1,1 +1,10 @@
-[]
+[
+  {
+    "id": "f773a634b50a",
+    "agent": "Designer",
+    "contenu": "Concevoir un parcours simple, une interface responsive, accessible au clavier et conforme aux besoins mobile.",
+    "source": "synthese_finale",
+    "probleme": "démonstration de persistance",
+    "confiance": 0.8
+  }
+]
