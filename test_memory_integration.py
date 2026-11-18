@@ -31,7 +31,8 @@ class MemoryIntegrationTests(unittest.TestCase):
                     store.lire_agent(role),
                     lecons_communes,
                 )
-                self.assertNotIn("Leçons prises en compte", reponse.proposition)
+                self.assertNotIn("mémoire individuelle", reponse.proposition.lower())
+                self.assertNotIn("mémoire commune", reponse.proposition.lower())
 
     def test_agents_integrent_les_lecons_individuelles_et_communes(self) -> None:
         with tempfile.TemporaryDirectory() as dossier:
@@ -46,13 +47,21 @@ class MemoryIntegrationTests(unittest.TestCase):
             )
 
             for role, analyser in ANALYSEURS.items():
+                reponse_sans_memoire = analyser(
+                    "concevoir une application",
+                    [],
+                    [],
+                )
                 reponse = analyser(
                     "concevoir une application",
                     store.lire_agent(role),
                     store.lire_commune(),
                 )
-                self.assertIn(f"Leçon individuelle pour {role}", reponse.proposition)
-                self.assertIn("Toujours vérifier les hypothèses.", reponse.proposition)
+                self.assertNotIn(f"Leçon individuelle pour {role}", reponse.proposition)
+                self.assertNotIn("Toujours vérifier les hypothèses.", reponse.proposition)
+                self.assertNotIn("Leçons prises en compte", reponse.proposition)
+                self.assertGreater(len(reponse.proposition), 80)
+                self.assertNotEqual(reponse_sans_memoire.proposition, reponse.proposition)
 
 
 if __name__ == "__main__":

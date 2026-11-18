@@ -1,5 +1,6 @@
 from architecte import analyser as architecte
 from architecte import reviser as reviser_architecte
+from agent_profiles import obtenir_profil
 from developpeur import analyser as developpeur
 from developpeur import reviser as reviser_developpeur
 from qa import analyser as qa
@@ -24,15 +25,32 @@ reponses = [
         probleme,
         memory_store.lire_agent("Architecte"),
         lecons_communes,
+        obtenir_profil("Architecte"),
     ),
     developpeur(
         probleme,
         memory_store.lire_agent("Développeur"),
         lecons_communes,
+        obtenir_profil("Développeur"),
     ),
-    qa(probleme, memory_store.lire_agent("QA"), lecons_communes),
-    critique(probleme, memory_store.lire_agent("Critique"), lecons_communes),
-    designer(probleme, memory_store.lire_agent("Designer"), lecons_communes),
+    qa(
+        probleme,
+        memory_store.lire_agent("QA"),
+        lecons_communes,
+        obtenir_profil("QA"),
+    ),
+    critique(
+        probleme,
+        memory_store.lire_agent("Critique"),
+        lecons_communes,
+        obtenir_profil("Critique"),
+    ),
+    designer(
+        probleme,
+        memory_store.lire_agent("Designer"),
+        lecons_communes,
+        obtenir_profil("Designer"),
+    ),
 ]
 
 for reponse in reponses:
@@ -44,11 +62,31 @@ for reponse in reponses:
     print(f"Confiance : {reponse.confiance:.0%}")
 
 revisions = [
-    reviser_architecte(reponses[0], reponses[1:]),
-    reviser_developpeur(reponses[1], reponses[:1] + reponses[2:]),
-    reviser_qa(reponses[2], reponses[:2] + reponses[3:]),
-    reviser_critique(reponses[3], reponses[:3]),
-    reviser_designer(reponses[4], reponses[:4]),
+    reviser_architecte(
+        reponses[0],
+        reponses[1:],
+        obtenir_profil("Architecte"),
+    ),
+    reviser_developpeur(
+        reponses[1],
+        reponses[:1] + reponses[2:],
+        obtenir_profil("Développeur"),
+    ),
+    reviser_qa(
+        reponses[2],
+        reponses[:2] + reponses[3:],
+        obtenir_profil("QA"),
+    ),
+    reviser_critique(
+        reponses[3],
+        reponses[:3],
+        obtenir_profil("Critique"),
+    ),
+    reviser_designer(
+        reponses[4],
+        reponses[:4],
+        obtenir_profil("Designer"),
+    ),
 ]
 
 print("\n" + "=" * 50)
@@ -71,6 +109,7 @@ print("VOTE")
 resultat_vote = organiser_vote(revisions)
 for vote in resultat_vote.votes:
     print(f"- {vote.votant} vote pour {vote.candidat}")
+    print(f"  Justification : {vote.justification}")
 print("\nRésultats :")
 for role, score in resultat_vote.scores.items():
     print(f"- {role} : {score} vote(s)")
@@ -80,20 +119,7 @@ print(f"Taux de consensus : {resultat_vote.taux_consensus:.0%}")
 print("\n" + "=" * 50)
 print("SYNTHESE FINALE")
 synthese = synthetiser(revisions)
-print("\nPoints d'accord :")
-for point in synthese.points_accord:
-    print(f"- {point}")
-print("\nRisques communs :")
-for risque in synthese.risques_communs:
-    print(f"- {risque}")
-print("\nObjections prises en compte :")
-for objection in synthese.objections:
-    print(f"- {objection}")
 print(f"\nConfiance moyenne : {synthese.confiance_moyenne:.0%}")
 print(f"\nRecommandation : {synthese.recommandation}")
 
-lecons_generees = sauvegarder_lecons(probleme, revisions, synthese, memory_store)
-print("\nApprentissage enregistré :")
-for role in ("Architecte", "Développeur", "QA", "Critique", "Designer"):
-    print(f"- {role}")
-print("- mémoire commune")
+sauvegarder_lecons(probleme, revisions, synthese, memory_store)

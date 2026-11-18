@@ -1,19 +1,23 @@
 from memory_store import formater_contexte
-from models import ReponseAgent, RevisionAgent
+from models import ProfilAgent, ReponseAgent, RevisionAgent
 
 
 def analyser(
     probleme: str,
     lecons_individuelles: list[dict[str, object]] | None = None,
     lecons_communes: list[dict[str, object]] | None = None,
+    profil: ProfilAgent | None = None,
 ) -> ReponseAgent:
     contexte_memoire = formater_contexte(lecons_individuelles, lecons_communes)
     proposition = (
-        f"Pour le problème '{probleme}', définir les cas d'erreur et écrire "
-        "les tests dès le début afin d'éviter les régressions."
+        f"Avant toute validation du problème '{probleme}', j'établis les critères "
+        "bloquants : résultat attendu, cas d'erreur, comportement limite et "
+        "absence de régression. Les tests doivent être reliés à ces critères."
     )
     if contexte_memoire:
-        proposition += f" Leçons prises en compte : {contexte_memoire}."
+        proposition += " J'ajoute explicitement les chemins d'échec au plan de validation."
+    if profil is not None and profil.niveau_prudence >= 5:
+        proposition += " Chaque scénario doit disposer d'une preuve vérifiable."
     return ReponseAgent(
         role="QA",
         proposition=proposition,
@@ -28,7 +32,14 @@ def analyser(
 def reviser(
     reponse: ReponseAgent,
     autres_reponses: list[ReponseAgent],
+    profil: ProfilAgent | None = None,
 ) -> RevisionAgent:
+    justification = (
+        f"Révision effectuée après lecture de {len(autres_reponses)} "
+        "réponses d'agents."
+    )
+    if profil is not None and profil.niveau_prudence >= 5:
+        justification += " Je maintiens un seuil d'acceptation explicite avant toute livraison."
     return RevisionAgent(
         role=reponse.role,
         action="modifier",
@@ -42,8 +53,5 @@ def reviser(
             "vérifiables."
         ],
         confiance=0.9,
-        justification=(
-            f"Révision effectuée après lecture de {len(autres_reponses)} "
-            "réponses d'agents."
-        ),
+        justification=justification,
     )

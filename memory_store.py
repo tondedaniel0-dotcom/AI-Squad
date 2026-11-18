@@ -17,19 +17,17 @@ def formater_contexte(
     lecons_individuelles: list[dict[str, Any]] | None,
     lecons_communes: list[dict[str, Any]] | None,
 ) -> str:
-    sections = []
-    for libelle, lecons in (
-        ("mémoire individuelle", lecons_individuelles or []),
-        ("mémoire commune", lecons_communes or []),
+    contenus = []
+    for lecons in (
+        lecons_individuelles or [],
+        lecons_communes or [],
     ):
-        contenus = [
+        contenus.extend(
             str(lecon["contenu"])
             for lecon in lecons
             if isinstance(lecon.get("contenu"), str) and lecon["contenu"].strip()
-        ]
-        if contenus:
-            sections.append(f"{libelle} : " + " | ".join(contenus))
-    return " ; ".join(sections)
+        )
+    return " ; ".join(contenus)
 
 
 class MemoryStore:

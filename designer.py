@@ -1,24 +1,25 @@
 from memory_store import formater_contexte
-from models import ReponseAgent, RevisionAgent
+from models import ProfilAgent, ReponseAgent, RevisionAgent
 
 
 def analyser(
     probleme: str,
     lecons_individuelles: list[dict[str, object]] | None = None,
     lecons_communes: list[dict[str, object]] | None = None,
+    profil: ProfilAgent | None = None,
 ) -> ReponseAgent:
     contexte_memoire = formater_contexte(lecons_individuelles, lecons_communes)
     proposition = (
-        f"Pour '{probleme}', concevoir un parcours en trois étapes : "
-        "accueil, action principale et confirmation, avec un seul bouton "
-        "d'action principal par écran. Utiliser une approche mobile-first, "
-        "des mises en page fluides sans défilement horizontal et des zones "
-        "tactiles d'au moins 44 px. Rendre chaque champ accessible au clavier, "
-        "avec un libellé explicite, un focus visible, un contraste d'au moins "
-        "4,5:1 et des erreurs affichées directement près du champ concerné."
+        f"Du point de vue de l'utilisateur confronté à '{probleme}', je propose "
+        "un parcours court avec une intention principale visible à chaque écran, "
+        "une navigation mobile simple, des actions faciles à atteindre et des "
+        "messages d'erreur compréhensibles. Je vérifie aussi le clavier, le focus, "
+        "le contraste et les erreurs auprès des parcours les plus défavorisés."
     )
     if contexte_memoire:
-        proposition += f" Leçons prises en compte : {contexte_memoire}."
+        proposition += " Je fais valider les décisions les plus importantes sur les parcours courants et défavorisés."
+    if profil is not None and profil.niveau_creativite >= 5:
+        proposition += " Je propose plusieurs variantes du parcours avant de figer l'interface."
     return ReponseAgent(
         role="Designer",
         proposition=proposition,
@@ -36,7 +37,14 @@ def analyser(
 def reviser(
     reponse: ReponseAgent,
     autres_reponses: list[ReponseAgent],
+    profil: ProfilAgent | None = None,
 ) -> RevisionAgent:
+    justification = (
+        f"Révision effectuée après lecture de {len(autres_reponses)} "
+        "réponses d'agents."
+    )
+    if profil is not None and profil.niveau_creativite >= 5:
+        justification += " Cette révision conserve plusieurs possibilités de parcours pour les tester avec les utilisateurs."
     return RevisionAgent(
         role=reponse.role,
         action="modifier",
@@ -52,8 +60,5 @@ def reviser(
             "d'accessibilité et de responsive design à une phase ultérieure."
         ],
         confiance=0.88,
-        justification=(
-            f"Révision effectuée après lecture de {len(autres_reponses)} "
-            "réponses d'agents."
-        ),
+        justification=justification,
     )

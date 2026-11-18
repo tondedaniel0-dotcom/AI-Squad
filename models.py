@@ -21,9 +21,19 @@ class RevisionAgent:
 
 
 @dataclass
+class ProfilAgent:
+    role: str
+    style: str
+    niveau_creativite: int
+    niveau_prudence: int
+    specialite: str
+
+
+@dataclass
 class Vote:
     votant: str
     candidat: str
+    justification: str
 
 
 @dataclass

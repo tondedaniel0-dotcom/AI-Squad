@@ -6,5 +6,21 @@
     "source": "synthese_finale",
     "probleme": "démonstration de persistance",
     "confiance": 0.8
+  },
+  {
+    "id": "52c22dbfa2da",
+    "agent": "Equipe",
+    "contenu": "Construire un MVP en Python avec une architecture simple et évolutive, puis valider les hypothèses et les cas limites avec des tests dès le début. Les objections soulevées doivent être traitées avant de figer l'architecture. Points d'accord : Une approche progressive avec un MVP; Une solution simple et maîtrisée; La validation par les tests; Un parcours utilisateur simple et accessible. Risques communs : Les besoins ou hypothèses pourraient être mal validés; La couverture des cas limites pourrait être insuffisante; Les contraintes de validation doivent être résolues.",
+    "source": "synthese_finale",
+    "probleme": " Créer un SaaS de réservation de terrains de football.",
+    "confiance": 0.836
+  },
+  {
+    "id": "feff200734b2",
+    "agent": "Equipe",
+    "contenu": "Construire un MVP en Python avec une architecture simple et évolutive, puis valider les hypothèses et les cas limites avec des tests dès le début. Les objections soulevées doivent être traitées avant de figer l'architecture. Points d'accord : Une approche progressive avec un MVP; La validation par les tests; Un parcours utilisateur simple et accessible. Risques communs : Les besoins ou hypothèses pourraient être mal validés; La couverture des cas limites pourrait être insuffisante; Les contraintes de validation doivent être résolues.",
+    "source": "synthese_finale",
+    "probleme": " Créer un SaaS de réservation de terrains de football.",
+    "confiance": 0.836
   }
 ]
