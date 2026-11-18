@@ -8,6 +8,7 @@ from developpeur import analyser as analyser_developpeur
 from designer import analyser as analyser_designer
 from memory_store import MemoryStore
 from qa import analyser as analyser_qa
+from security import analyser as analyser_security
 
 
 ANALYSEURS = {
@@ -16,6 +17,7 @@ ANALYSEURS = {
     "QA": analyser_qa,
     "Critique": analyser_critique,
     "Designer": analyser_designer,
+    "Security": analyser_security,
 }
 
 

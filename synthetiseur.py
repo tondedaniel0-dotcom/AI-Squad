@@ -28,6 +28,14 @@ _POINTS_ACCORD = {
         "mobile",
         "responsive",
     },
+    "La sécurité et l'isolation des locataires doivent être garanties": {
+        "sécurité",
+        "authentification",
+        "autorisation",
+        "tenant",
+        "locataire",
+        "permissions",
+    },
 }
 
 _RISQUES_COMMUNS = {

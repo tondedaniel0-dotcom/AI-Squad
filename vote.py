@@ -37,6 +37,13 @@ CRITERES_ROLE = {
         ("clarté", ("simple", "lisible", "compréhensible", "navigation")),
         ("feedback utilisateur", ("feedback", "erreur", "confirmation")),
     ),
+    "Security": (
+        ("authentification", ("authentification", "session", "connexion")),
+        ("autorisation", ("autorisation", "permission", "rôle", "rbac")),
+        ("contrôle des données", ("tenant", "locataire", "données", "isolation")),
+        ("sécurité API", ("api", "idorr", "cors", "rate", "entrée")),
+        ("chiffrement", ("chiffrement", "tls", "secret", "clé")),
+    ),
 }
 
 
@@ -46,6 +53,7 @@ POIDS_ROLE = {
     "QA": (0.25, 0.20, 0.20, 0.20, 0.15),
     "Critique": (0.20, 0.25, 0.20, 0.20, 0.15),
     "Designer": (0.25, 0.25, 0.15, 0.15, 0.20),
+    "Security": (0.25, 0.25, 0.20, 0.15, 0.15),
 }
 
 
@@ -106,10 +114,13 @@ def _choisir_candidat(
     candidat = max(meilleurs, key=lambda revision: revision.role)
 
     score, notes = noter_proposition(votant, candidat)
-    critere_texte = ", ".join(CRITERES_ROLE[votant][index][0] for index in range(5))
+    critere_texte = ", ".join(
+        CRITERES_ROLE[votant][index][0]
+        for index in range(len(CRITERES_ROLE[votant]))
+    )
     details = ", ".join(f"{nom}={note:.1f}/10" for nom, note in notes.items())
     justification = (
-        f"J'ai évalué les cinq propositions selon : {critere_texte}. "
+        f"J'ai évalué les six propositions selon : {critere_texte}. "
         f"{candidat.role} obtient {score:.2f}/10 "
         f"(détails : {details}). "
         "Cette proposition est préférée pour sa meilleure note pondérée "

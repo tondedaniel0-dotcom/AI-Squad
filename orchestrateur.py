@@ -9,6 +9,8 @@ from critique import analyser as critique
 from critique import reviser as reviser_critique
 from designer import analyser as designer
 from designer import reviser as reviser_designer
+from security import analyser as security
+from security import reviser as reviser_security
 from lesson_extractor import sauvegarder_lecons
 from memory_store import MemoryStore
 from synthetiseur import synthetiser
@@ -51,6 +53,12 @@ reponses = [
         lecons_communes,
         obtenir_profil("Designer"),
     ),
+    security(
+        probleme,
+        memory_store.lire_agent("Security"),
+        lecons_communes,
+        obtenir_profil("Security"),
+    ),
 ]
 
 for reponse in reponses:
@@ -86,6 +94,11 @@ revisions = [
         reponses[4],
         reponses[:4],
         obtenir_profil("Designer"),
+    ),
+    reviser_security(
+        reponses[5],
+        reponses[:5],
+        obtenir_profil("Security"),
     ),
 ]
 

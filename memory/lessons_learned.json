@@ -22,5 +22,13 @@
     "source": "synthese_finale",
     "probleme": " Créer un SaaS de réservation de terrains de football.",
     "confiance": 0.836
+  },
+  {
+    "id": "88b3f74ea5cf",
+    "agent": "Equipe",
+    "contenu": "Construire un SaaS testable, accessible et isolé par tenant. Points d'accord : Approche progressive; Séparation sécurité. Risques communs : Isolation multi-tenant; Cas d’erreur.",
+    "source": "synthese_finale",
+    "probleme": "SaaS de réservation",
+    "confiance": 0.85
   }
 ]

@@ -95,12 +95,27 @@ class IndividualVoteTests(unittest.TestCase):
 
         from vote import noter_proposition
 
-        for votant in ("Architecte", "Développeur", "QA", "Critique", "Designer"):
+        revisions.extend([
+            revision(
+                "Security",
+                "Authentification forte, autorisation RBAC, isolation des locataires "
+                "et chiffrement des données.",
+                0.95,
+            ),
+        ])
+        for votant in (
+            "Architecte",
+            "Développeur",
+            "QA",
+            "Critique",
+            "Designer",
+            "Security",
+        ):
             scores = [
                 noter_proposition(votant, proposition)[0]
                 for proposition in revisions
             ]
-            self.assertEqual(len(scores), 5)
+            self.assertEqual(len(scores), 6)
             self.assertTrue(all(0 <= score <= 10 for score in scores))
 
     def test_consensus_intermediaire_possible(self) -> None:

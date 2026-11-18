@@ -43,7 +43,15 @@ class LessonExtractorTests(unittest.TestCase):
 
         self.assertEqual(
             set(lecons),
-            {"Architecte", "Développeur", "QA", "Critique", "Designer", "commun"},
+            {
+                "Architecte",
+                "Développeur",
+                "QA",
+                "Critique",
+                "Designer",
+                "Security",
+                "commun",
+            },
         )
         self.assertEqual(lecons["QA"]["agent"], "QA")
         self.assertEqual(lecons["commun"]["agent"], "Equipe")

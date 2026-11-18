@@ -37,6 +37,13 @@ PROFILS_AGENT = {
         niveau_prudence=3,
         specialite="UX/UI",
     ),
+    "Security": ProfilAgent(
+        role="Security",
+        style="précis, prudent et orienté menaces",
+        niveau_creativite=2,
+        niveau_prudence=5,
+        specialite="sécurité applicative",
+    ),
 }
 
 

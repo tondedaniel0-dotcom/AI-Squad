@@ -8,4 +8,5 @@ Développeur
 QA
 Critique
 Designer
+Security
 Objectif : Créer une équipe virtuelle capable de débattre et de prendre des décisions sur un projet logiciel.

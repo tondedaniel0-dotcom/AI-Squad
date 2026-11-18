@@ -42,6 +42,8 @@ def extraire_lecons(
                     "les objections jusqu'à leur résolution.",
         "Designer": "Concevoir un parcours simple, une interface responsive, "
                     "accessible au clavier et conforme aux besoins mobile.",
+        "Security": "Séparer les rôles, isoler chaque tenant SaaS, contrôler "
+                     "les permissions côté serveur et protéger les données.",
     }
 
     lecons = {}
@@ -82,7 +84,14 @@ def sauvegarder_lecons(
     store = store or MemoryStore()
     lecons = extraire_lecons(probleme, revisions, synthese)
 
-    for role in ("Architecte", "Développeur", "QA", "Critique", "Designer"):
+    for role in (
+        "Architecte",
+        "Développeur",
+        "QA",
+        "Critique",
+        "Designer",
+        "Security",
+    ):
         store.ajouter_lecon(role, lecons[role])
     store.ajouter_lecon_commune(lecons["commun"])
     return lecons
