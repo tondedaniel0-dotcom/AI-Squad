@@ -48,6 +48,8 @@ def extraire_lecons(
                          "métier et limiter le périmètre du MVP.",
         "DevOps": "Utiliser CI/CD, IaC, des sauvegardes testées, un rollback "
                    "automatisé et des dimensions cloud basées sur l'utilisation.",
+        "Business Analyst": "Associer chaque besoin métier à une règle, "
+                             "un indicateur, un acteur et un critère d'acceptation.",
     }
 
     lecons = {}
@@ -97,6 +99,7 @@ def sauvegarder_lecons(
         "Security",
         "Product Owner",
         "DevOps",
+        "Business Analyst",
     ):
         store.ajouter_lecon(role, lecons[role])
     store.ajouter_lecon_commune(lecons["commun"])

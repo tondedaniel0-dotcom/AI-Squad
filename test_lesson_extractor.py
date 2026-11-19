@@ -43,7 +43,7 @@ def creer_synthese() -> Synthese:
 
 
 class LessonExtractorTests(unittest.TestCase):
-    def test_extraire_huit_lecons(self) -> None:
+    def test_extraire_neuf_lecons(self) -> None:
         lecons = extraire_lecons(
             "concevoir une application",
             creer_revisions(),
@@ -61,6 +61,7 @@ class LessonExtractorTests(unittest.TestCase):
                 "Security",
                 "Product Owner",
                 "DevOps",
+                "Business Analyst",
                 "commun",
             },
         )
@@ -86,6 +87,7 @@ class LessonExtractorTests(unittest.TestCase):
             self.assertEqual(len(store.lire_agent("Security")), 1)
             self.assertEqual(len(store.lire_agent("Product Owner")), 1)
             self.assertEqual(len(store.lire_agent("DevOps")), 1)
+            self.assertEqual(len(store.lire_agent("Business Analyst")), 1)
             self.assertEqual(len(store.lire_commune()), 1)
 
     def test_evitement_des_doublons(self) -> None:

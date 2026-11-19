@@ -57,6 +57,15 @@ _POINTS_ACCORD = {
         "disponibilité",
         "infrastructure",
     },
+    "Les besoins métier doivent être mesurables": {
+        "besoin",
+        "règle",
+        "métier",
+        "indicateur",
+        "usage",
+        "acceptation",
+        "valeur",
+    },
 }
 
 _RISQUES_COMMUNS = {

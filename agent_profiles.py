@@ -58,6 +58,13 @@ PROFILS_AGENT = {
         niveau_prudence=5,
         specialite="infrastructure, exploitation et optimisation des coûts",
     ),
+    "Business Analyst": ProfilAgent(
+        role="Business Analyst",
+        style="analytique, factuel et orienté besoins métier",
+        niveau_creativite=3,
+        niveau_prudence=4,
+        specialite="analyse métier et mesure de valeur",
+    ),
 }
 
 

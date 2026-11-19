@@ -58,6 +58,13 @@ CRITERES_ROLE = {
         ("automatisation", ("automatis", "ci/cd", "provision", "infra")),
         ("optimisation des coûts", ("coût", "dimension", "finops", "cloud")),
     ),
+    "Business Analyst": (
+        ("compréhension du besoin", ("besoin", "utilisateur", "objectif")),
+        ("règles métier", ("règle", "métier", "cas d'usage")),
+        ("mesure de la valeur", ("valeur", "indicateur", "mesure")),
+        ("cas d'usage", ("usage", "acteur", "processus", "cas")),
+        ("critères d'acceptation", ("acceptation", "critère", "résultat")),
+    ),
 }
 
 
@@ -70,6 +77,7 @@ POIDS_ROLE = {
     "Security": (0.25, 0.25, 0.20, 0.15, 0.15),
     "Product Owner": (0.30, 0.25, 0.15, 0.15, 0.15),
     "DevOps": (0.25, 0.25, 0.20, 0.15, 0.15),
+    "Business Analyst": (0.25, 0.25, 0.20, 0.15, 0.15),
 }
 
 
@@ -136,7 +144,7 @@ def _choisir_candidat(
     )
     details = ", ".join(f"{nom}={note:.1f}/10" for nom, note in notes.items())
     justification = (
-        f"J'ai évalué les huit propositions selon : {critere_texte}. "
+        f"J'ai évalué les neuf propositions selon : {critere_texte}. "
         f"{candidat.role} obtient {score:.2f}/10 "
         f"(détails : {details}). "
         "Cette proposition est préférée pour sa meilleure note pondérée "

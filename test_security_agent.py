@@ -30,7 +30,7 @@ class SecurityAgentTests(unittest.TestCase):
         self.assertEqual(revision.role, "Security")
         self.assertGreaterEqual(len(revision.objections), 1)
 
-    def test_integration_complete_avec_huit_agents(self) -> None:
+    def test_integration_complete_avec_neuf_agents(self) -> None:
         revisions = [
             RevisionAgent(
                 role,
@@ -99,14 +99,21 @@ class SecurityAgentTests(unittest.TestCase):
                     ["Tester la restauration."],
                     0.92,
                 ),
+                (
+                    "Business Analyst",
+                    "Règles métier, cas d’usage, indicateurs et critères d’acceptation.",
+                    ["Besoin ambigu"],
+                    ["Valider les exigences."],
+                    0.88,
+                ),
             )
         ]
 
         resultat = organiser_vote(revisions)
-        self.assertEqual(len(resultat.votes), 8)
+        self.assertEqual(len(resultat.votes), 9)
         for vote in resultat.votes:
             self.assertTrue(vote.justification)
-        self.assertEqual(sum(resultat.scores.values()), 8)
+        self.assertEqual(sum(resultat.scores.values()), 9)
         self.assertEqual(set(resultat.scores), {
             "Architecte",
             "Développeur",
@@ -116,6 +123,7 @@ class SecurityAgentTests(unittest.TestCase):
             "Security",
             "Product Owner",
             "DevOps",
+            "Business Analyst",
         })
 
     def test_lecon_security_en_memoire(self) -> None:
@@ -204,6 +212,14 @@ class SecurityAgentTests(unittest.TestCase):
                 (
                     "Product Owner",
                     "Valeur utilisateur, MVP, priorités, ROI et périmètre.",
+                ),
+                (
+                    "DevOps",
+                    "CI/CD, sauvegardes, rollback et observabilité.",
+                ),
+                (
+                    "Business Analyst",
+                    "Règles métier, cas d’usage, indicateurs et acceptation.",
                 ),
             )
         ]

@@ -11,6 +11,7 @@ from qa import analyser as analyser_qa
 from security import analyser as analyser_security
 from product_owner import analyser as analyser_product_owner
 from devops import analyser as analyser_devops
+from business_analyst import analyser as analyser_business_analyst
 from devops import analyser as analyser_devops
 
 
@@ -23,7 +24,7 @@ ANALYSEURS = {
     "Security": analyser_security,
     "Product Owner": analyser_product_owner,
     "DevOps": analyser_devops,
-    "DevOps": analyser_devops,
+    "Business Analyst": analyser_business_analyst,
 }
 
 

@@ -68,6 +68,11 @@ class IndividualVoteTests(unittest.TestCase):
                 "CI/CD, Infrastructure as Code, observabilité, rollback et FinOps.",
                 0.92,
             ),
+            revision(
+                "Business Analyst",
+                "Règles métier, cas d’usage, indicateur de valeur et critères d’acceptation.",
+                0.88,
+            ),
         ]
 
         resultat = organiser_vote(revisions)
@@ -76,7 +81,7 @@ class IndividualVoteTests(unittest.TestCase):
         self.assertGreater(len(set(candidats)), 1)
         self.assertNotEqual(candidats, ["QA"] * 5)
         self.assertTrue(all(vote.justification for vote in resultat.votes))
-        self.assertEqual(sum(resultat.scores.values()), 8)
+        self.assertEqual(sum(resultat.scores.values()), 9)
         self.assertGreater(resultat.taux_consensus, 0)
 
     def test_toutes_les_propositions_sont_evaluees(self) -> None:
@@ -132,6 +137,13 @@ class IndividualVoteTests(unittest.TestCase):
                 0.92,
             ),
         ])
+        revisions.extend([
+            revision(
+                "Business Analyst",
+                "Règles métier, cas d’usage, indicateur de valeur et acceptation.",
+                0.88,
+            ),
+        ])
         for votant in (
             "Architecte",
             "Développeur",
@@ -141,12 +153,13 @@ class IndividualVoteTests(unittest.TestCase):
             "Security",
             "Product Owner",
             "DevOps",
+            "Business Analyst",
         ):
             scores = [
                 noter_proposition(votant, proposition)[0]
                 for proposition in revisions
             ]
-            self.assertEqual(len(scores), 8)
+            self.assertEqual(len(scores), 9)
             self.assertTrue(all(0 <= score <= 10 for score in scores))
 
     def test_consensus_intermediaire_possible(self) -> None:
@@ -193,11 +206,16 @@ class IndividualVoteTests(unittest.TestCase):
                 "CI/CD, sauvegardes, observabilité, rollback et optimisation des coûts.",
                 0.92,
             ),
+            revision(
+                "Business Analyst",
+                "Règles métier, cas d’usage, indicateurs et critères d’acceptation.",
+                0.88,
+            ),
         ]
 
         resultat = organiser_vote(revisions)
 
-        self.assertGreater(resultat.taux_consensus, 1 / 8)
+        self.assertGreater(resultat.taux_consensus, 1 / 9)
         self.assertLess(resultat.taux_consensus, 1.0)
 
 

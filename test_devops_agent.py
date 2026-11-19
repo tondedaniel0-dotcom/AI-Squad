@@ -41,7 +41,7 @@ class DevOpsAgentTests(unittest.TestCase):
         self.assertEqual(revision.role, "DevOps")
         self.assertGreaterEqual(len(revision.objections), 1)
 
-    def test_huit_votes_et_consensus(self) -> None:
+    def test_neuf_votes_et_consensus(self) -> None:
         revisions = [
             revision("Architecte", "Architecture modulaire", 0.85),
             revision("Développeur", "MVP Python testable", 0.80),
@@ -50,6 +50,7 @@ class DevOpsAgentTests(unittest.TestCase):
             revision("Designer", "Parcours utilisateur accessible", 0.88),
             revision("Security", "RBAC et isolation du tenant", 0.95),
             revision("Product Owner", "MVP prioritaire avec ROI", 0.90),
+            revision("Business Analyst", "Règles métier et indicateurs", 0.88),
             revision(
                 "DevOps",
                 "CI/CD, IaC, observabilité, sauvegardes, rollback et FinOps",
@@ -57,8 +58,8 @@ class DevOpsAgentTests(unittest.TestCase):
             ),
         ]
         resultat = organiser_vote(revisions)
-        self.assertEqual(len(resultat.votes), 8)
-        self.assertEqual(sum(resultat.scores.values()), 8)
+        self.assertEqual(len(resultat.votes), 9)
+        self.assertEqual(sum(resultat.scores.values()), 9)
         self.assertEqual(
             set(vote.votant for vote in resultat.votes),
             {
@@ -69,7 +70,9 @@ class DevOpsAgentTests(unittest.TestCase):
                 "Designer",
                 "Security",
                 "Product Owner",
+                "Business Analyst",
                 "DevOps",
+                "Business Analyst",
             },
         )
         self.assertGreater(resultat.taux_consensus, 0)

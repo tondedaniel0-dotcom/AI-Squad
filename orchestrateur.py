@@ -15,6 +15,8 @@ from product_owner import analyser as product_owner
 from product_owner import reviser as reviser_product_owner
 from devops import analyser as devops
 from devops import reviser as reviser_devops
+from business_analyst import analyser as business_analyst
+from business_analyst import reviser as reviser_business_analyst
 from lesson_extractor import sauvegarder_lecons
 from memory_store import MemoryStore
 from synthetiseur import synthetiser
@@ -90,6 +92,12 @@ reponses = [
         memory_store.lire_agent("DevOps"),
         lecons_communes,
         obtenir_profil("DevOps"),
+    ),
+    business_analyst(
+        probleme,
+        memory_store.lire_agent("Business Analyst"),
+        lecons_communes,
+        obtenir_profil("Business Analyst"),
         search_product_owner,
     ),
 ]
@@ -142,6 +150,11 @@ revisions = [
         reponses[7],
         reponses[:7],
         obtenir_profil("DevOps"),
+    ),
+    reviser_business_analyst(
+        reponses[8],
+        reponses[:8],
+        obtenir_profil("Business Analyst"),
     ),
 ]
 
