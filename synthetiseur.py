@@ -1,6 +1,7 @@
 import re
 
 from models import RevisionAgent, Synthese
+from consensus_facilitator import analyser_consensus
 
 
 _POINTS_ACCORD = {
@@ -137,10 +138,35 @@ def synthetiser(revisions: list[RevisionAgent]) -> Synthese:
             "l'architecture."
         )
 
+    analyse = analyser_consensus(revisions)
+
+    for convergence in analyse.convergences:
+        point = f"{convergence.theme} ({len(convergence.agents_support)} agents)"
+        if point not in points_accord:
+            points_accord.append(point)
+
+    for desaccord in analyse.desaccords:
+        risque = (
+            f"Désaccord thématique sur {desaccord.theme} : "
+            f"{len(desaccord.agents_support)}/{len(revisions)} agents concernés"
+        )
+        if risque not in risques_communs:
+            risques_communs.append(risque)
+
+    for point in analyse.points_non_resolus:
+        if point not in objections:
+            objections.append(point)
+
+    if analyse.recommandations:
+        recommandation += " Recommandations par thème : " + " ".join(
+            analyse.recommandations
+        )
+
     return Synthese(
         points_accord=points_accord,
         risques_communs=risques_communs,
         objections=objections,
         confiance_moyenne=sum(r.confiance for r in revisions) / len(revisions),
         recommandation=recommandation,
+        analyse_consensus=analyse,
     )

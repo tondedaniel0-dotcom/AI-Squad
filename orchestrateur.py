@@ -191,4 +191,32 @@ synthese = synthetiser(revisions)
 print(f"\nConfiance moyenne : {synthese.confiance_moyenne:.0%}")
 print(f"\nRecommandation : {synthese.recommandation}")
 
+if synthese.analyse_consensus is not None:
+    analyse = synthese.analyse_consensus
+    print("\nCONVERGENCES THÉMATIQUES")
+    if analyse.convergences:
+        for convergence in analyse.convergences:
+            print(
+                f"- {convergence.theme} : "
+                f"{len(convergence.agents_support)}/{len(revisions)} "
+                f"({convergence.taux:.0%}) — {convergence.niveau}"
+            )
+            print(f"  Recommandation : {convergence.recommandation}")
+    else:
+        print("- Aucun thème majoritairement convergent.")
+
+    print("\nDÉSACCORDS THÉMATIQUES")
+    if analyse.desaccords:
+        for desaccord in analyse.desaccords:
+            print(
+                f"- {desaccord.theme} : "
+                f"{len(desaccord.agents_support)}/{len(revisions)} favorables "
+                f"— {desaccord.niveau}"
+            )
+            print(f"  Recommandation : {desaccord.recommandation}")
+    else:
+        print("- Aucun désaccord thématique significatif.")
+
+    print(f"\nTaux de consensus thématique : {analyse.taux_global:.0%}")
+
 sauvegarder_lecons(probleme, revisions, synthese, memory_store)

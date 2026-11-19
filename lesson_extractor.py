@@ -72,6 +72,21 @@ def extraire_lecons(
         f"{synthese.recommandation} Points d'accord : {accords}. "
         f"Risques communs : {risques}."
     )
+    analyse = synthese.analyse_consensus
+    if analyse is not None:
+        convergences = "; ".join(
+            f"{item.theme} ({item.taux:.0%}, {item.niveau})"
+            for item in analyse.convergences
+        )
+        desaccords = "; ".join(
+            f"{item.theme} ({len(item.agents_support)} agents)"
+            for item in analyse.desaccords
+        )
+        contenu_commune += (
+            f" Consensus thématique : {analyse.taux_global:.0%}. "
+            f"Convergences : {convergences or 'aucune'}. "
+            f"Désaccords : {desaccords or 'aucun'}."
+        )
     lecons["commun"] = _lecon(
         "Equipe",
         probleme,
