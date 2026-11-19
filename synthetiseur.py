@@ -45,6 +45,18 @@ _POINTS_ACCORD = {
         "objectif",
         "périmètre",
     },
+    "L'exploitation, la fiabilité et les coûts doivent être maîtrisés": {
+        "cicd",
+        "ci/cd",
+        "déploiement",
+        "observabilité",
+        "sauvegarde",
+        "rollback",
+        "scalabilité",
+        "coût",
+        "disponibilité",
+        "infrastructure",
+    },
 }
 
 _RISQUES_COMMUNS = {

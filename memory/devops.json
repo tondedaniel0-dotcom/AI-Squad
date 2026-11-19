@@ -1,0 +1,10 @@
+[
+  {
+    "id": "4ff3e736dce6",
+    "agent": "DevOps",
+    "contenu": "Utiliser CI/CD, IaC, des sauvegardes testées, un rollback automatisé et des dimensions cloud basées sur l'utilisation.",
+    "source": "synthese_finale",
+    "probleme": "SaaS de réservation de terrains",
+    "confiance": 0.92
+  }
+]

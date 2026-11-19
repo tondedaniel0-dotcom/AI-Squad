@@ -16,6 +16,7 @@ def creer_revisions() -> list[RevisionAgent]:
         "Designer",
         "Security",
         "Product Owner",
+        "DevOps",
     )
     return [
         RevisionAgent(
@@ -42,7 +43,7 @@ def creer_synthese() -> Synthese:
 
 
 class LessonExtractorTests(unittest.TestCase):
-    def test_extraire_sept_lecons(self) -> None:
+    def test_extraire_huit_lecons(self) -> None:
         lecons = extraire_lecons(
             "concevoir une application",
             creer_revisions(),
@@ -59,6 +60,7 @@ class LessonExtractorTests(unittest.TestCase):
                 "Designer",
                 "Security",
                 "Product Owner",
+                "DevOps",
                 "commun",
             },
         )
@@ -83,6 +85,7 @@ class LessonExtractorTests(unittest.TestCase):
             self.assertEqual(len(store.lire_agent("Designer")), 1)
             self.assertEqual(len(store.lire_agent("Security")), 1)
             self.assertEqual(len(store.lire_agent("Product Owner")), 1)
+            self.assertEqual(len(store.lire_agent("DevOps")), 1)
             self.assertEqual(len(store.lire_commune()), 1)
 
     def test_evitement_des_doublons(self) -> None:

@@ -63,6 +63,11 @@ class IndividualVoteTests(unittest.TestCase):
                 "Prioriser le MVP selon la valeur utilisateur, le ROI et le périmètre.",
                 0.90,
             ),
+            revision(
+                "DevOps",
+                "CI/CD, Infrastructure as Code, observabilité, rollback et FinOps.",
+                0.92,
+            ),
         ]
 
         resultat = organiser_vote(revisions)
@@ -71,7 +76,7 @@ class IndividualVoteTests(unittest.TestCase):
         self.assertGreater(len(set(candidats)), 1)
         self.assertNotEqual(candidats, ["QA"] * 5)
         self.assertTrue(all(vote.justification for vote in resultat.votes))
-        self.assertEqual(sum(resultat.scores.values()), 7)
+        self.assertEqual(sum(resultat.scores.values()), 8)
         self.assertGreater(resultat.taux_consensus, 0)
 
     def test_toutes_les_propositions_sont_evaluees(self) -> None:
@@ -120,6 +125,13 @@ class IndividualVoteTests(unittest.TestCase):
                 0.90,
             ),
         ])
+        revisions.extend([
+            revision(
+                "DevOps",
+                "CI/CD, Infrastructure as Code, monitoring, rollback et FinOps.",
+                0.92,
+            ),
+        ])
         for votant in (
             "Architecte",
             "Développeur",
@@ -128,12 +140,13 @@ class IndividualVoteTests(unittest.TestCase):
             "Designer",
             "Security",
             "Product Owner",
+            "DevOps",
         ):
             scores = [
                 noter_proposition(votant, proposition)[0]
                 for proposition in revisions
             ]
-            self.assertEqual(len(scores), 7)
+            self.assertEqual(len(scores), 8)
             self.assertTrue(all(0 <= score <= 10 for score in scores))
 
     def test_consensus_intermediaire_possible(self) -> None:
@@ -175,11 +188,16 @@ class IndividualVoteTests(unittest.TestCase):
                 "MVP prioritaire, valeur utilisateur, ROI, périmètre et objectifs.",
                 0.90,
             ),
+            revision(
+                "DevOps",
+                "CI/CD, sauvegardes, observabilité, rollback et optimisation des coûts.",
+                0.92,
+            ),
         ]
 
         resultat = organiser_vote(revisions)
 
-        self.assertGreater(resultat.taux_consensus, 1 / 7)
+        self.assertGreater(resultat.taux_consensus, 1 / 8)
         self.assertLess(resultat.taux_consensus, 1.0)
 
 

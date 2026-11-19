@@ -11,6 +11,7 @@ AGENT_MEMORY_FILES = {
     "Designer": "designer.json",
     "Security": "security.json",
     "Product Owner": "product_owner.json",
+    "DevOps": "devops.json",
 }
 COMMON_MEMORY_FILE = "lessons_learned.json"
 

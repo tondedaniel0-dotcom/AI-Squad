@@ -46,6 +46,8 @@ def extraire_lecons(
                      "les permissions côté serveur et protéger les données.",
         "Product Owner": "Prioriser les besoins utilisateur, mesurer la valeur "
                          "métier et limiter le périmètre du MVP.",
+        "DevOps": "Utiliser CI/CD, IaC, des sauvegardes testées, un rollback "
+                   "automatisé et des dimensions cloud basées sur l'utilisation.",
     }
 
     lecons = {}
@@ -94,6 +96,7 @@ def sauvegarder_lecons(
         "Designer",
         "Security",
         "Product Owner",
+        "DevOps",
     ):
         store.ajouter_lecon(role, lecons[role])
     store.ajouter_lecon_commune(lecons["commun"])

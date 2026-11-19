@@ -38,5 +38,13 @@
     "source": "synthese_finale",
     "probleme": "SaaS de réservation de terrains",
     "confiance": 0.87
+  },
+  {
+    "id": "3efa9e627dd3",
+    "agent": "Equipe",
+    "contenu": "Déployer un SaaS testable, sécurisé, observable et à coût maîtrisé. Points d'accord : MVP reproductible; Sécurité tenant. Risques communs : Périmètre excessif; Absence de rollback.",
+    "source": "synthese_finale",
+    "probleme": "SaaS de réservation de terrains",
+    "confiance": 0.87
   }
 ]

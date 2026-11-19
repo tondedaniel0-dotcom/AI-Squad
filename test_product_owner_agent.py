@@ -43,7 +43,7 @@ class ProductOwnerAgentTests(unittest.TestCase):
         self.assertEqual(revision.role, "Product Owner")
         self.assertIn("valeur", revision.proposition.lower())
 
-    def test_demonstration_saas_avec_sept_agents(self) -> None:
+    def test_demonstration_saas_avec_huit_agents(self) -> None:
         revisions = [
             creer_revision("Architecte", "Architecture modulaire", 0.85),
             creer_revision("Développeur", "MVP Python testable", 0.80),
@@ -60,6 +60,11 @@ class ProductOwnerAgentTests(unittest.TestCase):
                 0.95,
             ),
             creer_revision(
+                "DevOps",
+                "CI/CD, rollback, sauvegarde et observabilité",
+                0.92,
+            ),
+            creer_revision(
                 "Product Owner",
                 "Réserver, payer et annuler avec une valeur utilisateur mesurée",
                 0.90,
@@ -67,8 +72,8 @@ class ProductOwnerAgentTests(unittest.TestCase):
         ]
 
         resultat = organiser_vote(revisions)
-        self.assertEqual(len(resultat.votes), 7)
-        self.assertEqual(sum(resultat.scores.values()), 7)
+        self.assertEqual(len(resultat.votes), 8)
+        self.assertEqual(sum(resultat.scores.values()), 8)
         self.assertEqual(
             set(vote.votant for vote in resultat.votes),
             {
@@ -79,6 +84,7 @@ class ProductOwnerAgentTests(unittest.TestCase):
                 "Designer",
                 "Security",
                 "Product Owner",
+                "DevOps",
             },
         )
         self.assertTrue(all(vote.justification for vote in resultat.votes))

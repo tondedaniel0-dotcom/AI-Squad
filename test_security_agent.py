@@ -30,7 +30,7 @@ class SecurityAgentTests(unittest.TestCase):
         self.assertEqual(revision.role, "Security")
         self.assertGreaterEqual(len(revision.objections), 1)
 
-    def test_integration_complete_avec_sept_agents(self) -> None:
+    def test_integration_complete_avec_huit_agents(self) -> None:
         revisions = [
             RevisionAgent(
                 role,
@@ -92,14 +92,21 @@ class SecurityAgentTests(unittest.TestCase):
                     ["Définir un objectif métier."],
                     0.90,
                 ),
+                (
+                    "DevOps",
+                    "CI/CD, Infrastructure as Code, sauvegardes et rollback.",
+                    ["Panne opérationnelle"],
+                    ["Tester la restauration."],
+                    0.92,
+                ),
             )
         ]
 
         resultat = organiser_vote(revisions)
-        self.assertEqual(len(resultat.votes), 7)
+        self.assertEqual(len(resultat.votes), 8)
         for vote in resultat.votes:
             self.assertTrue(vote.justification)
-        self.assertEqual(sum(resultat.scores.values()), 7)
+        self.assertEqual(sum(resultat.scores.values()), 8)
         self.assertEqual(set(resultat.scores), {
             "Architecte",
             "Développeur",
@@ -108,6 +115,7 @@ class SecurityAgentTests(unittest.TestCase):
             "Designer",
             "Security",
             "Product Owner",
+            "DevOps",
         })
 
     def test_lecon_security_en_memoire(self) -> None:

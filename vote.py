@@ -51,12 +51,12 @@ CRITERES_ROLE = {
         ("MVP", ("mvp", "essentiel", "minimum")),
         ("ROI", ("roi", "coût", "revenu", "mesure")),
     ),
-    "Product Owner": (
-        ("valeur métier", ("valeur", "bénéfice", "impact")),
-        ("besoin utilisateur", ("utilisateur", "besoin", "usage")),
-        ("priorisation", ("priorit", "p0", "p1", "périmètre")),
-        ("MVP", ("mvp", "essentiel", "minimum")),
-        ("ROI", ("roi", "coût", "revenu", "mesure")),
+    "DevOps": (
+        ("déployabilité", ("déploiement", "ci/cd", "iac", "reproductible")),
+        ("fiabilité", ("sauvegarde", "rollback", "disponibilité", "reprise")),
+        ("observabilité", ("observabilité", "monitoring", "logs", "alertes")),
+        ("automatisation", ("automatis", "ci/cd", "provision", "infra")),
+        ("optimisation des coûts", ("coût", "dimension", "finops", "cloud")),
     ),
 }
 
@@ -69,7 +69,7 @@ POIDS_ROLE = {
     "Designer": (0.25, 0.25, 0.15, 0.15, 0.20),
     "Security": (0.25, 0.25, 0.20, 0.15, 0.15),
     "Product Owner": (0.30, 0.25, 0.15, 0.15, 0.15),
-    "Product Owner": (0.30, 0.25, 0.15, 0.15, 0.15),
+    "DevOps": (0.25, 0.25, 0.20, 0.15, 0.15),
 }
 
 
@@ -136,7 +136,7 @@ def _choisir_candidat(
     )
     details = ", ".join(f"{nom}={note:.1f}/10" for nom, note in notes.items())
     justification = (
-        f"J'ai évalué les sept propositions selon : {critere_texte}. "
+        f"J'ai évalué les huit propositions selon : {critere_texte}. "
         f"{candidat.role} obtient {score:.2f}/10 "
         f"(détails : {details}). "
         "Cette proposition est préférée pour sa meilleure note pondérée "

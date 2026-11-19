@@ -51,6 +51,13 @@ PROFILS_AGENT = {
         niveau_prudence=4,
         specialite="stratégie produit",
     ),
+    "DevOps": ProfilAgent(
+        role="DevOps",
+        style="opérationnel, rigoureux et orienté automatisation",
+        niveau_creativite=3,
+        niveau_prudence=5,
+        specialite="infrastructure, exploitation et optimisation des coûts",
+    ),
 }
 
 

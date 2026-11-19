@@ -13,6 +13,8 @@ from security import analyser as security
 from security import reviser as reviser_security
 from product_owner import analyser as product_owner
 from product_owner import reviser as reviser_product_owner
+from devops import analyser as devops
+from devops import reviser as reviser_devops
 from lesson_extractor import sauvegarder_lecons
 from memory_store import MemoryStore
 from synthetiseur import synthetiser
@@ -82,6 +84,12 @@ reponses = [
         memory_store.lire_agent("Product Owner"),
         lecons_communes,
         obtenir_profil("Product Owner"),
+    ),
+    devops(
+        probleme,
+        memory_store.lire_agent("DevOps"),
+        lecons_communes,
+        obtenir_profil("DevOps"),
         search_product_owner,
     ),
 ]
@@ -129,6 +137,11 @@ revisions = [
         reponses[6],
         reponses[:6],
         obtenir_profil("Product Owner"),
+    ),
+    reviser_devops(
+        reponses[7],
+        reponses[:7],
+        obtenir_profil("DevOps"),
     ),
 ]
 

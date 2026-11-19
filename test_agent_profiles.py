@@ -8,6 +8,8 @@ from designer import analyser as analyser_designer
 from qa import analyser as analyser_qa
 from security import analyser as analyser_security
 from product_owner import analyser as analyser_product_owner
+from devops import analyser as analyser_devops
+from devops import analyser as analyser_devops
 
 
 ANALYSEURS = {
@@ -18,11 +20,13 @@ ANALYSEURS = {
     "Designer": analyser_designer,
     "Security": analyser_security,
     "Product Owner": analyser_product_owner,
+    "DevOps": analyser_devops,
+    "DevOps": analyser_devops,
 }
 
 
 class AgentProfileTests(unittest.TestCase):
-    def test_cinq_profils_complets(self) -> None:
+    def test_huit_profils_complets(self) -> None:
         self.assertEqual(set(PROFILS_AGENT), set(ANALYSEURS))
         for profil in PROFILS_AGENT.values():
             self.assertTrue(profil.style)
@@ -66,6 +70,8 @@ class AgentProfileTests(unittest.TestCase):
         self.assertIn("utilisateur", propositions["Designer"].lower())
         self.assertIn("tenant", propositions["Security"].lower())
         self.assertIn("valeur", propositions["Product Owner"].lower())
+        self.assertIn("déploiement", propositions["DevOps"].lower())
+        self.assertIn("déploiement", propositions["DevOps"].lower())
 
 
 if __name__ == "__main__":
