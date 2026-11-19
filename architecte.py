@@ -7,6 +7,7 @@ def analyser(
     lecons_individuelles: list[dict[str, object]] | None = None,
     lecons_communes: list[dict[str, object]] | None = None,
     profil: ProfilAgent | None = None,
+    recherche: dict[str, object] | None = None,
 ) -> ReponseAgent:
     contexte_memoire = formater_contexte(lecons_individuelles, lecons_communes)
     proposition = (
@@ -18,6 +19,10 @@ def analyser(
         proposition += " Les interfaces internes seront définies avant les composants afin d'éviter les changements tardifs."
     if profil is not None and profil.niveau_prudence >= 4:
         proposition += " Je privilégie des frontières stables avant d'ajouter des options nouvelles."
+    if recherche is not None and recherche.get("enabled"):
+        nombre_sources = len(recherche.get("sources", []))
+        if nombre_sources:
+            proposition += f" Les références externes disponibles sont limitées à {nombre_sources} source(s) autorisée(s)."
     return ReponseAgent(
         role="Architecte",
         proposition=proposition,

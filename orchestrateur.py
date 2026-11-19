@@ -17,10 +17,24 @@ from lesson_extractor import sauvegarder_lecons
 from memory_store import MemoryStore
 from synthetiseur import synthetiser
 from vote import organiser_vote
+from external_search import ExternalSearchService
 
 probleme = input("Quel est le problème à analyser ? ")
 memory_store = MemoryStore()
 lecons_communes = memory_store.lire_commune()
+search_service = ExternalSearchService()
+search_architecte = search_service.rechercher(
+    "Architecte",
+    "architecture SaaS composants responsabilité évolutivité",
+)
+search_security = search_service.rechercher(
+    "Security",
+    "authentification autorisation isolation tenant sécurité API",
+)
+search_product_owner = search_service.rechercher(
+    "Product Owner",
+    "valeur MVP utilisateur priorisation ROI",
+)
 
 print("\n" + "=" * 50)
 
@@ -30,6 +44,7 @@ reponses = [
         memory_store.lire_agent("Architecte"),
         lecons_communes,
         obtenir_profil("Architecte"),
+        search_architecte,
     ),
     developpeur(
         probleme,
@@ -60,12 +75,14 @@ reponses = [
         memory_store.lire_agent("Security"),
         lecons_communes,
         obtenir_profil("Security"),
+        search_security,
     ),
     product_owner(
         probleme,
         memory_store.lire_agent("Product Owner"),
         lecons_communes,
         obtenir_profil("Product Owner"),
+        search_product_owner,
     ),
 ]
 

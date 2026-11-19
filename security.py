@@ -7,6 +7,7 @@ def analyser(
     lecons_individuelles: list[dict[str, object]] | None = None,
     lecons_communes: list[dict[str, object]] | None = None,
     profil: ProfilAgent | None = None,
+    recherche: dict[str, object] | None = None,
 ) -> ReponseAgent:
     contexte_memoire = formater_contexte(lecons_individuelles, lecons_communes)
     proposition = (
@@ -26,6 +27,18 @@ def analyser(
             " Toute confiance dans les données utilisateur ou dans le tenant "
             "courant doit être évitée."
         )
+    if recherche is not None and recherche.get("enabled"):
+        domaines = sorted({
+            str(source.get("domain", ""))
+            for source in recherche.get("sources", [])
+            if source.get("domain")
+        })
+        if domaines:
+            proposition += (
+                " Les éléments sécurité peuvent être vérifiés auprès de "
+                + ", ".join(domaines)
+                + "."
+            )
     return ReponseAgent(
         role="Security",
         proposition=proposition,

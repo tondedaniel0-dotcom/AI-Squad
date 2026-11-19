@@ -1,0 +1,13 @@
+{
+  "enabled": false,
+  "provider": "local",
+  "timeout_seconds": 5,
+  "max_results": 5,
+  "allowed_domains": [
+    "learn.microsoft.com",
+    "owasp.org",
+    "w3.org"
+  ],
+  "cache_enabled": true,
+  "cache_ttl_seconds": 86400
+}

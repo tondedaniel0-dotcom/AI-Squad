@@ -1,0 +1,19 @@
+[
+  {
+    "query": "OWASP sécurité",
+    "role": "Security",
+    "results": [
+      {
+        "title": "OWASP Top 10",
+        "url": "https://owasp.org/www-project-top-ten/",
+        "domain": "owasp.org",
+        "category": "security",
+        "trust_score": 0.98,
+        "snippet": "Référentiel des risques de sécurité applicative.",
+        "retrieved_at": "2026-11-19T12:17:19.739282+00:00",
+        "provider": "local_allowlist"
+      }
+    ],
+    "expires_at": "2026-11-20T12:17:19.739337+00:00"
+  }
+]

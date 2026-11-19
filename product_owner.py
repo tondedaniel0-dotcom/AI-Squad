@@ -7,6 +7,7 @@ def analyser(
     lecons_individuelles: list[dict[str, object]] | None = None,
     lecons_communes: list[dict[str, object]] | None = None,
     profil: ProfilAgent | None = None,
+    recherche: dict[str, object] | None = None,
 ) -> ReponseAgent:
     contexte_memoire = formater_contexte(lecons_individuelles, lecons_communes)
     proposition = (
@@ -25,6 +26,13 @@ def analyser(
         proposition += (
             " Chaque option différée devra conserver un coût de reprise limité."
         )
+    if recherche is not None and recherche.get("enabled"):
+        nombre_sources = len(recherche.get("sources", []))
+        if nombre_sources:
+            proposition += (
+                f" Les arbitrages doivent rester appuyés par {nombre_sources} "
+                "source(s) vérifiable(s)."
+            )
     return ReponseAgent(
         role="Product Owner",
         proposition=proposition,

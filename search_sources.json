@@ -1,0 +1,29 @@
+[
+  {
+    "title": "Architecture cloud Azure",
+    "domain": "learn.microsoft.com",
+    "url": "https://learn.microsoft.com/azure/architecture/",
+    "category": "architecture",
+    "trust_score": 0.95,
+    "enabled": true,
+    "description": "Architecture, modèles de référence et bonnes pratiques."
+  },
+  {
+    "title": "OWASP Top 10",
+    "domain": "owasp.org",
+    "url": "https://owasp.org/www-project-top-ten/",
+    "category": "security",
+    "trust_score": 0.98,
+    "enabled": true,
+    "description": "Référentiel des risques de sécurité applicative."
+  },
+  {
+    "title": "WCAG",
+    "domain": "w3.org",
+    "url": "https://www.w3.org/WAI/standards-guidelines/wcag/",
+    "category": "accessibility",
+    "trust_score": 0.97,
+    "enabled": true,
+    "description": "Règles d'accessibilité pour les interfaces web."
+  }
+]
